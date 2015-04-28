@@ -1,0 +1,17 @@
+﻿@foreach (var review in ViewData["Reviews"] as List<eCommerceSite.Data.Review>)
+{
+    <div>
+        <p>
+            @review.Body
+            @for (int i = 1; i <= review.Stars; i++)
+            {
+                <span class="glyphicon glyphicon-star"></span>
+            }
+            @for (int i = 1; i <= (5 - review.Stars); i++)
+            {
+                <span class="glyphicon glyphicon-star-empty"></span>
+            }
+
+        </p>
+    </div>
+}

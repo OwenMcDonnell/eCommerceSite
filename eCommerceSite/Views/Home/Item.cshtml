@@ -1,0 +1,58 @@
+﻿@model eCommerceSite.Data.Item
+@{
+    ViewBag.Title = "Item";
+}
+
+<h2>@Model.Name</h2>
+<div class="row">
+    <div class="col-sm-2">
+        <img class="thumbnail" src="@Url.Action("ImageRender", "Home", new { Id = Model.Id })" alt="" height="150px" />
+    </div>
+    <div class="col-md-6">
+        <div class="media-object">
+            <div>
+                <p>
+                    @foreach (var item in ViewData["ItemDetails"] as List<eCommerceSite.Data.ItemDetails>)
+                    {
+                        <b>Made In :</b> @item.MadeIn <br />
+                        <b>Weight :</b> @item.Weight  <text>grams</text><br />
+                        <b>Materials :</b> @item.Materials <br />
+                    }
+
+                </p>
+
+
+            </div>
+            <div class="ratings">
+
+                <a class="btn" type="button" data-toggle="collapse" href="#ReviewReveal">@ViewData["ReviewsCount"] reviews</a>
+                <div class="collapse" id="ReviewReveal">
+                    <div class="well">
+                        @foreach (var review in ViewData["Reviews"] as List<eCommerceSite.Data.Review>)
+                        {
+                            <div>
+                                <p>
+                                    @review.Body
+                                    @for (int i = 1; i <= review.Stars; i++)
+                            {
+                                        <span class="glyphicon glyphicon-star"></span>
+                            }
+                                    @for (int i = 1; i <= (5 - review.Stars); i++)
+                            {
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+
+                                </p>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" type="submit"> Add to Cart </button>
+    </div>
+</div>
