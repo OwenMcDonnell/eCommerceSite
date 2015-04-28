@@ -14,7 +14,7 @@ namespace eCommerceSite.Data
         public string Country { get; set; }
         public decimal Total { get; set; }
         public System.DateTime OrderDate { get; set; }
-        [InverseProperty("Order")]
+        [InverseProperty("Orders")]
         public virtual IList<Item> Items { get; set; }
         [ForeignKey("UserId")]
         [InverseProperty("Orders")]

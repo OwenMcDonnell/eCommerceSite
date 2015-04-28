@@ -15,10 +15,10 @@ namespace eCommerceSite.Data
         public bool OnSale { get; set; }
         public string Description { get; set; }
 
-        public virtual int OrderId { get; set; }
-        [ForeignKey("OrderId")]
-        [InverseProperty("Orders")]
-        public virtual Order Order { get; set; }
+        //public virtual int OrderId { get; set; }
+        //[ForeignKey("OrderId")]
+        [InverseProperty("Items")]
+        public virtual IList<Order> Orders { get; set; }
         public virtual ItemDetails ItemDetails { get; set; }
         public ICollection<Review> Reviews { get; set; }
     }

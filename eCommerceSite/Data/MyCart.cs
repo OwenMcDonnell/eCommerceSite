@@ -12,9 +12,10 @@ namespace eCommerceSite.Data
         [Key]
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
         public string MyCartId { get; set; }
-        public IDictionary<Item, int> ItemsHash { get; set; }
+        public virtual User User { get; set; }
+        
+        public virtual IDictionary<Item, int> ItemsHash { get; set; }
         
         public int TaxRate { get; set; }
     
