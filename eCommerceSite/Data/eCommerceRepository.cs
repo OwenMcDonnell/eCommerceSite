@@ -25,10 +25,10 @@ namespace eCommerceSite.Data
         {
             return _ctx.Items;
         }
-        public IQueryable<ItemDetails> GetItemDetails()
-        {
-            return _ctx.ItemDetails;
-        }
+        //public IQueryable<ItemDetails> GetItemDetails()
+        //{
+        //    return _ctx.Items.;
+        //}
         public DbSet<MyCart> GetCarts()
         {
             return _ctx.Carts;

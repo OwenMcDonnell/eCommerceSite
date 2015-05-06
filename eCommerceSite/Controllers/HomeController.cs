@@ -60,9 +60,10 @@ namespace eCommerceSite.Controllers
         }
         public ActionResult Item(int Id) 
         {
-            var x = _rep.GetItemDetails().Where(i => i.ItemId == Id).ToList();
+            var x = _rep.GetItems().Where(i => i.Id == Id).ToList();
+            
             ViewData["Reviews"] = _rep.GetReviewsByItem(Id).ToList();
-            ViewData["ItemDetails"] = x;
+            ViewData["ItemDetails"] = x.FirstOrDefault().ItemDetails;
             ViewData["ReviewsCount"] = _rep.GetReviewsByItem(Id).ToList().Count;
             var result = _rep.GetObjects().Find(Id);
             

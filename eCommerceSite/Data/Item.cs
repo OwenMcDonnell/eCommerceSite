@@ -17,8 +17,9 @@ namespace eCommerceSite.Data
 
         //public virtual int OrderId { get; set; }
         //[ForeignKey("OrderId")]
-        [InverseProperty("Items")]
-        public virtual IList<Order> Orders { get; set; }
+        //[InverseProperty("Items")]
+        //public virtual Order Order { get; set; }
+        
         public virtual ItemDetails ItemDetails { get; set; }
         public ICollection<Review> Reviews { get; set; }
     }

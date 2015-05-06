@@ -9,16 +9,20 @@ namespace eCommerceSite.Data
 {
     public class MyCart
     {
+        
         [Key]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string MyCartId { get; set; }
-        public virtual User User { get; set; }
+        public ItemsHash ItemsHash { get; set; }       
+        public int TaxRate { get; set; } 
         
-        public virtual IDictionary<Item, int> ItemsHash { get; set; }
-        
-        public int TaxRate { get; set; }
-    
-        
+    }
+    [ComplexType]
+    public class ItemsHash
+    {
+        public int ItemsHashId { get; set; }
+        public List<Item> Items { get; set; }
+        public List<int> Count { get; set; }
+
     }
 }

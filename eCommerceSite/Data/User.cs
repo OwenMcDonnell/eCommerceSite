@@ -17,8 +17,7 @@ namespace eCommerceSite.Data
         public string LastName { get; set; }
         [InverseProperty("User")]
         public virtual IList<Order> Orders { get; set; }
-
-        
+       
         public virtual MyCart Cart { get; set; }
     }
 }

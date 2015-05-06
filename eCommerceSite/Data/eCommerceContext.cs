@@ -20,10 +20,11 @@ namespace eCommerceSite.Data
         }
         public DbSet<Item> Items { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<ItemDetails> ItemDetails { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<ItemDetails> ItemDetails { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<TaxRate> TaxRates { get; set; }
         public DbSet<MyCart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
     }
