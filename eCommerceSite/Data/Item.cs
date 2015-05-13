@@ -22,5 +22,6 @@ namespace eCommerceSite.Data
         
         public virtual ItemDetails ItemDetails { get; set; }
         public ICollection<Review> Reviews { get; set; }
+        //seeded_local_db test
     }
 }
