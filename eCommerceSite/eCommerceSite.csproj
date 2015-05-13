@@ -371,6 +371,7 @@
     <Content Include="Views\Home\MyCart.cshtml" />
     <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Views\Shared\ReviewCollapse.cshtml" />
+    <Content Include="Views\MyCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

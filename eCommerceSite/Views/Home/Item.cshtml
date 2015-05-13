@@ -12,12 +12,12 @@
         <div class="media-object">
             <div>
                 <p>
-                    @foreach (var item in ViewData["ItemDetails"] as List<eCommerceSite.Data.ItemDetails>)
-                    {
-                        <b>Made In :</b> @item.MadeIn <br />
-                        <b>Weight :</b> @item.Weight <text>grams</text><br />
-                        <b>Materials :</b> @item.Materials <br />
-                    }
+                    @*@foreach (var item in ViewData["ItemDetails"] as List<eCommerceSite.Data.ItemDetails>)
+    {*@ 
+                        <b>Made In :</b> @ViewData.Model.ItemDetails.MadeIn <br />
+                        <b>Weight :</b> @ViewData.Model.ItemDetails.Weight <text>grams</text><br />
+                        <b>Materials :</b> @ViewData.Model.ItemDetails.Materials <br />
+                    @*}*@
 
                 </p>
 
@@ -53,6 +53,6 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <button class="btn btn-primary" type="submit"> Add to Cart </button>
+        <p class="button"> @Html.ActionLink("Add to Cart", "AddToCart", "MyCart", new { id = Model.Id }, new { @class = "btn btn-primary" })</p>
     </div>
 </div>

@@ -53,11 +53,11 @@ namespace eCommerceSite.Controllers
             }
             return View();
         }
-        public ActionResult MyCart()
-        {
+        //public ActionResult MyCart()
+        //{
             
-            return View();
-        }
+        //    return View();
+        //}
         public ActionResult Item(int Id) 
         {
             var x = _rep.GetItems().Where(i => i.Id == Id).ToList();

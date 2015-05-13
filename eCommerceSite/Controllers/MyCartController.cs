@@ -19,7 +19,19 @@ namespace eCommerceSite.Controllers
         public ActionResult Index()
         {
             var cart = MyCartModel.GetCart(this.HttpContext);
+            var cartModel = cart.GetCartItems(this.HttpContext);
             return View();
+        }
+        
+        public ActionResult AddToCart(int id)
+        {
+            //var cart = new MyCartModel();
+            //cart.AddToCart(item, this.HttpContext);
+            var cart = MyCartModel.GetCart(this.HttpContext);
+            Item item = _rep.GetItems().Where(i => i.Id == id).ToList().FirstOrDefault();
+            cart.AddToCart(item, this.HttpContext);
+
+            return RedirectToAction("Index");
         }
 
     }

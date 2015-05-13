@@ -1,0 +1,16 @@
+﻿@model eCommerceSite.Data.MyCart
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (@Model != null)
+{
+    foreach (var item in @Model.ItemsHash.Items)
+    {
+        <p>
+            @Model.ItemsHash.Items : @Model.ItemsHash.Count
+        </p>
+    }
+}
+

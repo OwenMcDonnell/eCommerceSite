@@ -29,9 +29,29 @@ namespace eCommerceSite.Data
         //{
         //    return _ctx.Items.;
         //}
-        public DbSet<MyCart> GetCarts()
+        public IQueryable<MyCart> GetCarts()
         {
             return _ctx.Carts;
+            //if (_ctx.Carts.First() != null)
+            //{
+            //    return _ctx.Carts;
+            //}
+            //else
+            //{
+            //    _ctx.Carts.Add(new MyCart());
+            //    _ctx.SaveChanges();
+            //    return _ctx.Carts;
+            //}
+            
+        }
+        public void AddToCart(Item item)
+        {
+            _ctx.Carts.ItemsHash.Items.Add(item);
+           
+        }
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
         }
         
     }

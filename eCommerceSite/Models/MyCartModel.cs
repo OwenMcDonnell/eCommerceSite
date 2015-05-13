@@ -9,11 +9,12 @@ namespace eCommerceSite.Models
     public class MyCartModel
     {
         eCommerceRepository rep = new eCommerceRepository();
-        public static MyCart GetCart(HttpContextBase context)
+        string _CartId { get; set; }
+        public static MyCartModel GetCart(HttpContextBase context)
         {
-            var cart = new MyCart();
-            var cartModel = new MyCartModel();
-            cart.MyCartId = cartModel.GetCartId(context);
+            var cart = new MyCartModel();
+            //var cartModel = new MyCartModel();
+            cart._CartId = cart.GetCartId(context);
             return cart;
         }
         public string GetCartId(HttpContextBase context)
@@ -25,16 +26,44 @@ namespace eCommerceSite.Models
         
         public void AddToCart(Item item, HttpContextBase context)
         {
-            var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
-            if (cart.ItemsHash.Items.Contains(item))
+            if (rep.GetCarts().Single(c => c.MyCartId == _CartId).ToString() != "")
             {
-                cart.ItemsHash.Count[cart.ItemsHash.Items.IndexOf(item)] += 1;
+                MyCart cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
+                if (cart.ItemsHash.Items.Contains(item))
+                {
+                    cart.ItemsHash.Count[cart.ItemsHash.Items.IndexOf(item)] += 1;
+                    
+                }
+                else
+                {
+                    cart.ItemsHash.Items.Add(item);
+                    cart.ItemsHash.Count.Add(1);
+                }
             }
             else
             {
+                MyCart cart = new MyCart();
+                MyCartModel.GetCart(context);
+                rep.GetCarts().Add(cart);
+                cart.MyCartId = _CartId;
+                cart.ItemsHash = new ItemsHash();
+                cart.ItemsHash.Items = new List<Item>();
                 cart.ItemsHash.Items.Add(item);
+                cart.ItemsHash.Count = new List<int>();
                 cart.ItemsHash.Count.Add(1);
+                //if (cart.ItemsHash.Items.Contains(item))
+                //{
+                //    cart.ItemsHash.Count[cart.ItemsHash.Items.IndexOf(item)] += 1;
+                //}
+                //else
+                //{
+                //    cart.ItemsHash.Items.Add(item);
+                //    cart.ItemsHash.Count.Add(1);
+                //}
+                rep.SaveChanges();
             }
+           
+            rep.SaveChanges();
             
             //int currentCount;
             //cart.ItemsHash.TryGetValue(item, out currentCount);
@@ -59,8 +88,17 @@ namespace eCommerceSite.Models
         }
         public List<Item> GetCartItems(HttpContextBase context)
         {
-            var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
-            return cart.ItemsHash.Items;
+            //var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
+            if (rep.GetCarts().Contains(new MyCart { MyCartId = _CartId }))
+            {
+                MyCart cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
+                return cart.ItemsHash.Items;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
         public decimal GetCartTotal(HttpContextBase context)
         {

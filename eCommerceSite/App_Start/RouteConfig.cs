@@ -15,8 +15,8 @@ namespace eCommerceSite
 
             routes.MapRoute(
                 name: "MyCart",
-                url: "MyCart",
-                defaults: new { controller = "Home", action = "MyCart" }
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "MyCart", action = "Index" }
             );
             routes.MapRoute(
                 name: "Default",
