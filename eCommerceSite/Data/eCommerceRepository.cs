@@ -29,7 +29,7 @@ namespace eCommerceSite.Data
         //{
         //    return _ctx.Items.;
         //}
-        public IQueryable<MyCart> GetCarts()
+        public DbSet<MyCart> GetCarts()
         {
             return _ctx.Carts;
             //if (_ctx.Carts.First() != null)
@@ -44,9 +44,10 @@ namespace eCommerceSite.Data
             //}
             
         }
-        public void AddToCart(Item item)
+        public void AddToCart(MyCart cart, Item item)
         {
-            _ctx.Carts.ItemsHash.Items.Add(item);
+            var myCart = _ctx.Carts.Find(cart.MyCartId);
+            myCart.ItemsHash.Items.Add(item);
            
         }
         public void SaveChanges()
