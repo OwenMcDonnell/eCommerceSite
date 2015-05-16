@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\MyCartController.cs" />
+    <Compile Include="Data\eCommerceInitializer.cs" />
     <Compile Include="Data\eCommerceContext.cs" />
     <Compile Include="Data\eCommerceRepository.cs" />
     <Compile Include="Data\Item.cs" />

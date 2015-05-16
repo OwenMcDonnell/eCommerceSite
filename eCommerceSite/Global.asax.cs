@@ -1,5 +1,7 @@
-﻿using System;
+﻿using eCommerceSite.Data;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -16,13 +18,15 @@ namespace eCommerceSite
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new eCommerceInitializer());
             AreaRegistration.RegisterAllAreas();
-
+            
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            
         }
     }
 }
