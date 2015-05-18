@@ -12,12 +12,11 @@
         <div class="media-object">
             <div>
                 <p>
-                    @foreach (var item in ViewData["ItemDetails"] as List<eCommerceSite.Data.ItemDetails>)
-                    {
-                        <b>Made In :</b> @item.MadeIn <br />
-                        <b>Weight :</b> @item.Weight <text>grams</text><br />
-                        <b>Materials :</b> @item.Materials <br />
-                    }
+                    
+                        <b>Made In :</b> @Model.ItemDetails.MadeIn <br />
+                        <b>Weight :</b> @Model.ItemDetails.Weight <text>grams</text><br />
+                        <b>Materials :</b> @Model.ItemDetails.Materials <br />
+                   
 
                 </p>
 
