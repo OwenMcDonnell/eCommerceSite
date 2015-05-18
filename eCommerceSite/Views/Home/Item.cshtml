@@ -52,6 +52,6 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <button class="btn btn-primary" type="submit"> Add to Cart </button>
+        <p class="button"> @Html.ActionLink("Add to Cart", "AddToCart", "MyCart", new { id = Model.Id }, new { @class = "btn btn-primary" })</p>
     </div>
 </div>
