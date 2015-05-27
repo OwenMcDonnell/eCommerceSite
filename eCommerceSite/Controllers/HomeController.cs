@@ -11,19 +11,19 @@ namespace eCommerceSite.Controllers
 {
     public class HomeController : Controller
     {
-        private IMailService _mail;
-        private eCommerceRepository _rep;
-        public HomeController(IMailService mail)
+        private IMailService mail;
+        private IeCommerceRepository rep;
+        public HomeController(IMailService mailService, IeCommerceRepository repository)
         {
             
-            _mail = mail;
-            _rep = new eCommerceRepository();
+            mail = mailService;
+            rep = repository;
         }
 
         public ActionResult Index()
         {
 
-            var items = _rep.GetItems();
+            var items = rep.GetItems();
             return View(items);
         }
 
@@ -47,7 +47,7 @@ namespace eCommerceSite.Controllers
             var msg = string.Format("Comment from: {1}{0}Email:{2}{0}subject:{3}{0} Comment:{4}{0}",
                 Environment.NewLine, model.name, model.email, model.subject, model.message);
 
-            if (_mail.SendMail("companyemail@company.com", "customer@customer.com", "website contact", msg))
+            if (mail.SendMail("companyemail@company.com", "customer@customer.com", "website contact", msg))
             {
                 ViewBag.MailSent = true;
             }
@@ -58,20 +58,17 @@ namespace eCommerceSite.Controllers
             
             return View();
         }
-        public ActionResult Item(int Id) 
+        public ActionResult Item(int id) 
         {
-            var x = _rep.GetItems().Where(i => i.Id == Id).ToList();
-            
-            ViewData["Reviews"] = _rep.GetReviewsByItem(Id).ToList();
-            //ViewData["ItemDetails"] = x.FirstOrDefault();
-            ViewData["ReviewsCount"] = _rep.GetReviewsByItem(Id).ToList().Count;
-            var result = _rep.GetObjects().Find(Id);
-            
-            return View(result);
+            ViewData["Reviews"] = rep.GetReviewsByItem(id).ToList();
+            ViewData["ReviewsCount"] = rep.GetReviewsByItem(id).ToList().Count;
+
+            var item = rep.GetItems().Where(i => i.Id == id).First();
+            return View(item);
         }
-        public FileContentResult ImageRender(int Id)
+        public FileContentResult ImageRender(int id)
         {
-            byte[] ImgArray = _rep.GetObjects().Find(Id).Thumbnail;
+            byte[] ImgArray = rep.GetItems().Where(i => i.Id == id).First().Thumbnail;
             return new FileContentResult(ImgArray, "image/jpeg");
         }
     }

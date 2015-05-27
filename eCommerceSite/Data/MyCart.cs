@@ -9,6 +9,13 @@ namespace eCommerceSite.Data
 {
     public class MyCart
     {
+        public MyCart()
+        {
+            ItemsHash = new ItemsHash();
+            ItemsHash.Items = new Item[]{};
+            ItemsHash.Count = new int[]{};
+            this.ItemsHash = ItemsHash;
+        }
         
         [Key]
         public int Id { get; set; }
@@ -21,8 +28,8 @@ namespace eCommerceSite.Data
     public class ItemsHash
     {
         public int ItemsHashId { get; set; }
-        public List<Item> Items { get; set; }
-        public List<int> Count { get; set; }
+        public Item[] Items { get; set; }
+        public int[] Count { get; set; }
 
     }
 }

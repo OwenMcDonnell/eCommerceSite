@@ -206,6 +206,7 @@
     <Compile Include="Controllers\MyCartController.cs" />
     <Compile Include="Data\eCommerceContext.cs" />
     <Compile Include="Data\eCommerceRepository.cs" />
+    <Compile Include="Data\IeCommerceRepository.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\ItemDetails.cs" />
     <Compile Include="Data\MyCart.cs" />
@@ -368,9 +369,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
       <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
     </Content>
-    <Content Include="Views\Home\MyCart.cshtml" />
     <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Views\Shared\ReviewCollapse.cshtml" />
+    <Content Include="Views\MyCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

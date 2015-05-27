@@ -10,18 +10,36 @@ namespace eCommerceSite.Controllers
 {
     public class MyCartController : Controller
     {
-        private eCommerceRepository _rep;
-        // GET: /MyCart/
-        public MyCartController()
+        private IeCommerceRepository rep;
+        MyCartModel cartModel;
+        public MyCartController(IeCommerceRepository repository)
         {
-            _rep = new eCommerceRepository();
+            cartModel = new MyCartModel();
+            rep = repository;
         }
+        // GET: /MyCart/
         public ActionResult Index()
         {
-            var cart = MyCartModel.GetCart(this.HttpContext);
-            return View();
+           
+            var cart = cartModel.GetCart(this.HttpContext);
+            return View(cart);
         }
-        
 
+        public ActionResult AddToCart(int id)
+        {
+            var item = rep.GetItems().Where(i => i.Id == id).SingleOrDefault();
+            var cart = cartModel.GetCart(this.HttpContext);
+            if (cart.ItemsHash.Items.Contains(item))
+            {
+                rep.CartCountInc(cart, item);
+            }
+            else
+            {
+                rep.AddToCart(item, cart.MyCartId);
+                //rep.CartCountInc(cart, item);
+            }
+            
+            return View("Index", cart);
+        }
     }
 }

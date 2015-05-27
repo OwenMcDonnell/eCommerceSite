@@ -69,7 +69,7 @@ namespace eCommerceSite.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IMailService>().To<MailService>().InRequestScope();
-
+            kernel.Bind<IeCommerceRepository>().To<eCommerceRepository>().InRequestScope();
            
         }        
     }

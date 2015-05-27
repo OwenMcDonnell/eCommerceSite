@@ -1,0 +1,13 @@
+﻿@model eCommerceSite.Data.MyCart
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Items currently in your cart</h2>
+<div>
+    @foreach (var item in Model.ItemsHash.Items)
+    {
+        <p> @item.Thumbnail </p>
+    }
+</div>
