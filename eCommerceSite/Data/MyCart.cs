@@ -11,25 +11,22 @@ namespace eCommerceSite.Data
     {
         public MyCart()
         {
-            ItemsHash = new ItemsHash();
-            ItemsHash.Items = new Item[]{};
-            ItemsHash.Count = new int[]{};
-            this.ItemsHash = ItemsHash;
+            CartItems = new CartItems();
         }
         
         [Key]
         public int Id { get; set; }
-        public string MyCartId { get; set; }
-        public ItemsHash ItemsHash { get; set; }       
-        public int TaxRate { get; set; } 
+        public string MyCartId { get; set; }       
+        //public double TaxRate { get; set; }
+        public CartItems CartItems { get; set; }
         
     }
     [ComplexType]
-    public class ItemsHash
+    public class CartItems 
     {
-        public int ItemsHashId { get; set; }
-        public Item[] Items { get; set; }
-        public int[] Count { get; set; }
-
+        public int CartItemsId { get; set; }
+        public string ItemString { get; set; }
+        public string ItemCount { get; set; }  
     }
+    
 }

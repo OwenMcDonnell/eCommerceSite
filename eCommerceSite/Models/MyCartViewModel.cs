@@ -8,7 +8,8 @@ namespace eCommerceSite.Models
 {
     public class MyCartViewModel
     {
-        public List<MyCart> MyCarts { get; set; }
+        public List<Item> CartItems { get; set; }
+        public List<string> ItemTotals { get; set; }
         public decimal CartTotal { get; set; }
     }
 }

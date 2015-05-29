@@ -38,16 +38,41 @@ namespace eCommerceSite.Data
         {
             return ctx.Carts.Where(c => c.MyCartId == id).Single();
         }
-        public void AddToCart(Item item, string id)
+        public void AddToCart(Item item, MyCart cart)
+        {         
+            //var cart = ctx.Carts.Where(c => c.MyCartId == id).Single();
+            cart.CartItems.ItemString += item.Name;
+            cart.CartItems.ItemString += ";";
+            //cart.CartItems.ItemCount += 1;
+            //cart.CartItems.ItemCount += ";";
+            ctx.SaveChanges();
+        }
+        public void CartCountInc(MyCart cart, Item item)
         {
+            if (cart.CartItems.ItemCount == null)
+            {
+                cart.CartItems.ItemCount += "1";
+                cart.CartItems.ItemCount += ";";
+            }
+            else
+            {
+                List<int> itemsCount = cart.CartItems.ItemCount.Split(new char[] {';'}, 
+                    StringSplitOptions.RemoveEmptyEntries).Select(c => Int32.Parse(c)).ToList();
+                List<string> itemsList = cart.CartItems.ItemString.Split(new char[] {';'}, 
+                    StringSplitOptions.RemoveEmptyEntries).ToList();
+                if (itemsCount.Count > itemsList.IndexOf(item.Name))
+                {
+                    itemsCount[itemsList.IndexOf(item.Name)] += 1;
+                    cart.CartItems.ItemCount = String.Join(";", itemsCount);
+                }
+                else
+                {
+                    itemsCount.Add(1);
+                    cart.CartItems.ItemCount = String.Join(";", itemsCount);
+                }
+                
+            }
             
-            var cart = ctx.Carts.Where(c => c.MyCartId == id).Single();
-            Item[] arr = cart.ItemsHash.Items;
-            int[] arr2 = cart.ItemsHash.Count;
-            Array.Resize(ref arr, 1);
-            Array.Resize(ref arr2, 1);
-            arr[arr.Length - 1] = item;
-            arr2[arr2.Length - 1] = 1;
             ctx.SaveChanges();
         }
         public void AddCart(MyCart cart)
@@ -55,11 +80,7 @@ namespace eCommerceSite.Data
             ctx.Carts.Add(cart);
             ctx.SaveChanges();
         }
-        public void CartCountInc(MyCart cart, Item item)
-        {
-            cart.ItemsHash.Count[Array.IndexOf(cart.ItemsHash.Items, item)] += 1;
-            ctx.SaveChanges();
-        }
+        
         //public IQueryable<ItemDetails> GetItemDetails()
         //{
         //    return _ctx.Items.;

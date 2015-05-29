@@ -8,8 +8,11 @@ namespace eCommerceSite.Models
 {
     public class MyCartModel
     {
-        
-        eCommerceRepository rep = new eCommerceRepository();
+        IeCommerceRepository rep;
+        public MyCartModel(IeCommerceRepository repository)
+        {
+            rep = repository;
+        }
         //string myCartId { get; set; }
         public MyCart GetCart(HttpContextBase context)
         { 
@@ -38,25 +41,42 @@ namespace eCommerceSite.Models
             context.Session["CartId"] = tempCartId.ToString();
             return context.Session["CartId"].ToString();
         }
-        
-        public void AddToCart(Item item, HttpContextBase context)
+        public decimal GetCartTotal(MyCart cart)
         {
-            //var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
-            //if (cart.ItemsHash.Items.Contains(item))
-            //{
-            //    cart.ItemsHash.Count[cart.ItemsHash.Items.IndexOf(cart.ItemsHash.Items, item)] += 1;
-            //}
-            //else
-            //{
-            //    cart.ItemsHash.Items.Add(item);
-            //    cart.ItemsHash.Count.Add(1);
-            //}
-            
-            //int currentCount;
-            //cart.ItemsHash.TryGetValue(item, out currentCount);
-            
-            //cart.ItemsHash[item] = currentCount + 1;      
+            var cartList = cart.CartItems.ItemString.Split(';').ToList();
+            var ItemsCount = cart.CartItems.ItemCount.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(c => Int32.Parse(c)).ToList();
+            decimal total = 0;
+            foreach (string c in cartList)
+            {
+                if (c == "")
+                {
+                    break;
+                }
+                var item = rep.GetItems().Where(i => i.Name == c).First();
+                var count = ItemsCount[cartList.IndexOf(item.Name)];
+                total += (item.Price * count);
+            }
+            return total;
         }
+        
+        //public void AddToCart(Item item, HttpContextBase context)
+        //{
+        //    //var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
+        //    //if (cart.ItemsHash.Items.Contains(item))
+        //    //{
+        //    //    cart.ItemsHash.Count[cart.ItemsHash.Items.IndexOf(cart.ItemsHash.Items, item)] += 1;
+        //    //}
+        //    //else
+        //    //{
+        //    //    cart.ItemsHash.Items.Add(item);
+        //    //    cart.ItemsHash.Count.Add(1);
+        //    //}
+            
+        //    //int currentCount;
+        //    //cart.ItemsHash.TryGetValue(item, out currentCount);
+            
+        //    //cart.ItemsHash[item] = currentCount + 1;      
+        //}
         //public void RemoveFromCart(Item item, HttpContextBase context)
         //{
             //var cart = rep.GetCarts().SingleOrDefault(c => c.MyCartId == context.Session["CartId"]);
