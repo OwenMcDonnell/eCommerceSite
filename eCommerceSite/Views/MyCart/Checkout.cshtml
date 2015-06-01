@@ -1,0 +1,67 @@
+﻿@model eCommerceSite.Models.MyCartViewModel
+
+
+@{
+    ViewBag.Title = "Checkout";
+}
+@section scripts
+{
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+}
+<div class="container">
+    <div class='row'>
+        <form method="post">
+            <fieldset>
+                <div class='form-row'>
+                    <div class='col-xs-12 form-group required'>
+                        <label for="name" class="control-label">Name on Card</label>
+                        <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true" style="float: right"></span>
+                        <input class='form-control' type='text' id="name" placeholder="Enter name" name="name" data-val="true" data-val-required="*" value="" />
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-xs-12 form-group card required'>
+                        <label class='control-label'>Card Number</label>
+                        <span class="field-validation-valid" data-valmsg-for="ccnumber" data-valmsg-replace="true" style="float: right"></span>
+                        <input class='form-control card-number' size="16" data-val-ccnumber="Please enter a valid Credit card #" data-val="true" data-val-required="Credit card # is invalid" name="ccnumber" minlength="16" maxlength="16"/>
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-xs-4 form-group cvc required'>
+                        <label class='control-label'>CVC</label>
+                        <span class="field-validation-valid" data-valmsg-for="cvc" data-valmsg-replace="true" style="float: right"></span>
+                        <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size="3" type='text' data-val="true" data-val-required="*" name="cvc" minlength="3" maxlength="3" />
+                    </div>
+                    <div class='col-xs-4 form-group expiration required'>
+                        <label class='control-label'>Expiration</label>
+                        <span class="field-validation-valid" data-valmsg-for="expm" data-valmsg-replace="true" style="float: right"></span>
+                        <input autocomplete='off' class='form-control card-cvc' placeholder='MM' size="2" type='text' data-val="true" data-val-required="*" name="expm" minlength="2" maxlength="2" />
+                    </div>
+                    <div class='col-xs-4 form-group expiration required'>
+                        <label class='control-label'> </label>
+                        <span class="field-validation-valid" data-valmsg-for="expy" data-valmsg-replace="true" style="float: right"></span>
+                        <input autocomplete='off' class='form-control card-cvc' placeholder='YYYY' size="4" type='text' data-val="true" data-val-required="*" name="expy" minlength="4" maxlength="4" />
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-md-12'>
+                        <div class='total alert alert-info'>
+                            Total:
+                            <span class='amount'>@Model.CartTotal $</span>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-row'>
+                    <div class='col-md-12 form-group'>
+                        <button class='form-control btn btn-primary submit-button' type='submit'>Pay »</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+
+    </div>
+</div>

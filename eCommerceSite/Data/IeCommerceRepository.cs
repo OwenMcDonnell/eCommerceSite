@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCommerceSite.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,9 +13,11 @@ namespace eCommerceSite.Data
         void AddItem(Item item);
         MyCart GetMyCart(string id);
         void AddToCart(Item item, MyCart cart);
+        void RemoveFromCart(Item item, MyCart cart);
         IQueryable<Review> GetReviewsByItem(int id);
         void CartCountInc(MyCart cart, Item item);
         void AddCart(MyCart cart);
         DbSet<MyCart> GetCarts();
+        void CreateOrder(MyCart cart, OrderModel orderModel);
     }
 }

@@ -223,6 +223,7 @@
     <Compile Include="Models\MyCartModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\MyCartViewModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\MailService.cs" />
@@ -372,6 +373,8 @@
     <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Views\Shared\ReviewCollapse.cshtml" />
     <Content Include="Views\MyCart\Index.cshtml" />
+    <Content Include="Views\MyCart\Checkout.cshtml" />
+    <Content Include="Views\MyCart\CheckoutComplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

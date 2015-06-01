@@ -59,25 +59,38 @@ namespace eCommerceSite.Controllers
                 rep.AddToCart(item, cart);
                 rep.CartCountInc(cart, item);
             }
-            //List<Item> itemObjectList = new List<Item>();
-            //List<string> newItemsList = cart.CartItems.ItemString.Split(';').ToList();
-            //foreach (var i in newItemsList)
-            //{
-            //    if (i == "")
-            //    {
-            //        break;
-            //    }
-            //    itemObjectList.Add(rep.GetItems().Where(x => x.Name == i).First());
-            //}
-            //var viewModel = new MyCartViewModel
-            //{
-                
-            //    CartItems = itemObjectList,
-            //    ItemTotals = cart.CartItems.ItemCount.Split(';').ToList(),
-            //    CartTotal = cartModel.GetCartTotal(cart)
-            //};
+            
 
             return RedirectToAction("Index", new { item = item });
+        }
+        public ActionResult Checkout(MyCartViewModel Model)
+        {
+            return View(Model);
+        }
+        [HttpPost]
+        public ActionResult Checkout(OrderModel orderModel)
+        {
+            var cart = cartModel.GetCart(this.HttpContext);
+            if (ModelState.IsValid)
+            {
+                rep.CreateOrder(cart, orderModel);
+                return View("CheckoutComplete");
+            }
+            else
+            {
+                return RedirectToAction("Checkout");
+            }
+                
+
+           
+            
+        }
+        public ActionResult RemoveFromCart(int id)
+        {
+            var cart = cartModel.GetCart(this.HttpContext);
+            var item = rep.GetItems().Where(i => i.Id == id).SingleOrDefault();
+            rep.RemoveFromCart(item, cart);
+            return RedirectToAction("Index");
         }
     }
 }

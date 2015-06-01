@@ -8,10 +8,22 @@
 <div>
     @for (int i = 0; i < Model.CartItems.Count; i++)
     {
-        <p> <img class="thumbnail" src="@Url.Action("ImageRender", "Home", new { Id = Model.CartItems[i].Id})" alt="" height="150px" /> </p><span> Quantity: @Model.ItemTotals[i]</span>
+        <div class="row">
+            <div class="col-sm-2"> <p> <img class="thumbnail" src="@Url.Action("ImageRender", "Home", new { Id = Model.CartItems[i].Id})" alt="" height="150px" /> </p><span> Quantity: @Model.ItemTotals[i] @@ @Model.CartItems[i].Price ea.</span></div>
+
+            <div class="col-sm-6">
+                <p class="button"> @Html.ActionLink("Remove from Cart", "RemoveFromCart", "MyCart", new { id = Model.CartItems[i].Id }, new { @class = "btn btn-primary" })</p>
+            </div>
+        </div>
     }
 </div>
-<div>
-    <h4> Current Cart Total:</h4> <span><b> @Model.CartTotal $</b></span>
-    
+<div class="panel-footer">
+    <div class="row text-center">
+        <div class="col-xs-9">
+            <h4 class="text-right">Current Cart Total: <strong> @Model.CartTotal $</strong></h4>
+        </div>
+        <div class="col-xs-3">
+            <p> @Html.ActionLink("Checkout", "Checkout", "MyCart", Model, new { @class = "btn btn-primary btn-success" })</p>
+        </div>
+    </div>
 </div>

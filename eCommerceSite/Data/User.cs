@@ -15,8 +15,8 @@ namespace eCommerceSite.Data
         public int CCExpYear { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        [InverseProperty("User")]
-        public virtual IList<Order> Orders { get; set; }
+        //[InverseProperty("User")]
+        //public virtual IList<Order> Orders { get; set; }
        
         public virtual MyCart Cart { get; set; }
     }
