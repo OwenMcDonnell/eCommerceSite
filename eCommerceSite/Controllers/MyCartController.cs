@@ -21,24 +21,33 @@ namespace eCommerceSite.Controllers
         public ActionResult Index()
         {       
             var cart = cartModel.GetCart(this.HttpContext);
-            List<Item> itemObjectList = new List<Item>();
-            List<string> newItemsList = cart.CartItems.ItemString.Split(';').ToList();
-            foreach (var i in newItemsList)
+            if (cart.CartItems.ItemString != null)
             {
-                if (i == "")
+                List<Item> itemObjectList = new List<Item>();
+                List<string> newItemsList = cart.CartItems.ItemString.Split(';').ToList();
+                foreach (var i in newItemsList)
                 {
-                    break;
+                    if (i == "")
+                    {
+                        break;
+                    }
+                    itemObjectList.Add(rep.GetItems().Where(x => x.Name == i).First());
                 }
-                itemObjectList.Add(rep.GetItems().Where(x => x.Name == i).First());
-            }
-            var viewModel = new MyCartViewModel
-            {
+                var viewModel = new MyCartViewModel
+                {
 
-                CartItems = itemObjectList,
-                ItemTotals = cart.CartItems.ItemCount.Split(';').ToList(),
-                CartTotal = cartModel.GetCartTotal(cart)
-            };
-            return View(viewModel);
+                    CartItems = itemObjectList,
+                    ItemTotals = cart.CartItems.ItemCount.Split(';').ToList(),
+                    CartTotal = cartModel.GetCartTotal(cart)
+                };
+                return View(viewModel);
+
+            }
+            else
+            {
+                return View("EmptyCart");
+            }
+           
         }
 
         public ActionResult AddToCart(int id)

@@ -66,6 +66,10 @@ namespace eCommerceSite.Controllers
             var item = rep.GetItems().Where(i => i.Id == id).First();
             return View(item);
         }
+        public ActionResult Services()
+        {
+            return View();
+        }
         public FileContentResult ImageRender(int id)
         {
             byte[] ImgArray = rep.GetItems().Where(i => i.Id == id).First().Thumbnail;
