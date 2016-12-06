@@ -1,5 +1,6 @@
 configuration: Debug
-
+install:
+- ps: $env:Path = ""
 before_build:
   - nuget restore
   
