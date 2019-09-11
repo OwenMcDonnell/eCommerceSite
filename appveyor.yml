@@ -1,8 +1,10 @@
-configuration: Debug
-install:
-- ps: $env:Path = ""
+image: Visual Studio 2017
+#configuration: Debug
+#install:
+#- ps: $env:Path = ""
 before_build:
   - nuget restore
   
 build:
+  publish_wap_beanstalk: true
   verbosity: minimal
