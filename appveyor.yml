@@ -13,6 +13,6 @@ build:
   #- 7z a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
   
 artifacts:
-  - path: C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
+  - path: .\eCommerceSite\bin\eCommerceSite.dll
     name: myapp
     type: ElasticBeanstalkPackage
