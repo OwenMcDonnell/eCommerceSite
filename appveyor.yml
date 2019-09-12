@@ -10,7 +10,7 @@ build:
   verbosity: minimal
   
 after_build:
-  - 7z -a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
+  - 7z a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
   
 artifacts:
   - path: myapp.zip
