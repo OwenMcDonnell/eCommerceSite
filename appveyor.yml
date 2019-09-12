@@ -9,10 +9,10 @@ build:
   #publish_wap_beanstalk: true
   verbosity: minimal
   
-after_build:
-  - 7z a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
+#after_build:
+  #- 7z a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
   
 artifacts:
-  - path: myapp.zip
+  - path: C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
     name: myapp
     type: ElasticBeanstalkPackage
