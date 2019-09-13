@@ -6,13 +6,13 @@ before_build:
   - nuget restore
   
 build:
-  #publish_wap_beanstalk: true
+  publish_wap_beanstalk: true
   verbosity: minimal
   
 #after_build:
   #- 7z a myapp.zip C:\projects\ecommercesite\eCommerceSite\bin\eCommerceSite.dll
   
-artifacts:
-  - path: .\eCommerceSite\bin\eCommerceSite.dll
-    name: myapp
-    type: ElasticBeanstalkPackage
+#artifacts:
+ # - path: .\eCommerceSite\bin\eCommerceSite.dll
+  #  name: myapp
+   # type: ElasticBeanstalkPackage
